@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un compte</title>
+  <style>
+    /* Styles pour les boutons */
+    .btn {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #f1c40f;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .btn:hover {
+      background-color: #f39c12;
+    }
+
+    /* Styles pour la page de création de compte */
+    body {
+      background-color: #ecf0f1;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+      color: #f1c40f;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="password"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 18px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    /* Styles pour les messages d'erreur */
+    .error {
+      color: #e74c3c;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Créer un compte</h1>
+    <form method="POST" action="/creation">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password" required>
+      <label for="password_confirm">Confirmez votre mot de passe :</label>
+      <input type="password" id="password_confirm" name="password_confirm" required>
+      <button class="btn" type="submit">Créer le compte</button>
+      <p class="error" id="password_error"></p>
+    </form>
+  </div>
+ <script>
+function validateForm() {
+  var username = document.getElementById("username").value;
+  var password = document.getElementById("password").value;
+  var password_confirm = document.getElementById("password_confirm").value;
+  var password_error = document.getElementById("password_error");
+
+  // Vérifier si les champs sont vides
+  if (username == "" || password == "" || password_confirm == "") {
+    alert("Tous les champs sont requis.");
+    return false;
+  }
+
+  // Vérifier si les mots de passe correspondent
+  if (password != password_confirm) {
+    alert("Les mots de passe ne correspondent pas.");
+    return false;
+  }
+
+  // Vérifier si le mot de passe est valide
+  if (!validatePasswrd(password)) {
+    password_error.innerHTML = "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial et faire au moins 8 caractères de long.";
+    return false;
+  } else {
+    password_error.innerHTML = "";
+  }
+}
+
+</script>

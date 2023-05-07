@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ma page avec une barre de recherche</title>
+	<style>
+		.task-form {
+			display: none;
+		}
+		.task-actions {
+			display: inline-block;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Formulaire entrée</h1>
+	<!-- On ajoute un formulaire pour accéder aux tâches -->
+	<form method="post" action="{{ url_for('tasks') }}">
+		<button type="submit">Accés aux tâches</button>
+	</form>
+	<!-- On ajoute un bouton pour créer une nouvelle tâche -->
+	<button onclick="toggleTaskForm()">Créer</button>
+	<!-- On ajoute un formulaire pour créer une nouvelle tâche -->
+	<form class="task-form" action="{{ url_for('create_task') }}" method="post">
+
+		<label for="title">Titre :</label>
+		<input type="text" id="title" name="title">
+		<label for="description">Description :</label>
+		<textarea id="description" name="description" rows="3"></textarea>
+		<button type="submit">Créer</button>
+	</form>
+	<!-- On ajoute une liste non ordonnée pour afficher les tâches -->
+	<ul id="task-list"></ul>
+	<script>
+		// On crée un tableau vide pour stocker les tâches
+		const tasks = [];
+
+	// On crée une fonction pour ajouter une tâche à la liste
+		function addTask(event) {
+			event.preventDefault();
+					// On récupère les valeurs du titre et de la description
+			const title = document.getElementById('title').value;
+			const description = document.getElementById('description').value;
+				// On ajoute la nouvelle tâche au tableau
+			tasks.push({title, description});
+			// On réaffiche la liste mise à jour
+			renderTaskList();
+			// On cache le formulaire
+			toggleTaskForm();
+		}
+
+		// On crée une fonction pour afficher la liste de tâches
+		function renderTaskList() {
+			const taskList = document.getElementById('task-list');
+			taskList.innerHTML = '';
+					// Pour chaque tâche dans le tableau, on crée un élément <li> pour l'afficher
+			tasks.forEach((task, index) => {
+				const li = document.createElement('li');
+				const title = document.createElement('h3');
+				title.textContent = task.title;
+				const description = document.createElement('p');
+				description.textContent = task.description;
+				const actions = document.createElement('div');
+				actions.classList.add('task-actions');
+				const editButton = document.createElement('button');
+				editButton.textContent = 'Modifier';
+				editButton.addEventListener('click', () => editTask(index));
+				const deleteButton = document.createElement('button');
+				deleteButton.textContent = 'Supprimer';
+				deleteButton.addEventListener('click', () => deleteTask(index));
+				actions.appendChild(editButton);
+				actions.appendChild(deleteButton);
+				li.appendChild(title);
+				li.appendChild(description);
+				li.appendChild(actions);
+				taskList.appendChild(li);
+			});
+		}
+
+		function filterTasks() {
+		  const searchTerm = document.getElementById('search').value.toLowerCase();
+		  const filteredTasks = tasks.filter(task => task.title.toLowerCase().startsWith(searchTerm));
+		  renderTaskList(filteredTasks);
+		}
+
+		function editTask(index) {
+			const task = tasks[index];
+			const newTitle = prompt('Entrez le nouveau titre :', task.title);
+			const newDescription = prompt('Entrez la nouvelle description :', task.description);
+			if (newTitle !== null && newDescription !== null) {
+				task.title = newTitle;
+				task.description = newDescription;
+				renderTaskList();
+			}
+		}
+
+		function deleteTask(index) {
+			tasks.splice(index, 1);
+			renderTaskList();
+		}
+
+		function toggleTaskForm() {
+			const form = document.querySelector('.task-form');
+			form.style.display = form.style.display === 'none' ? 'block' : 'none';
+		}
+		fetch('/tasks')
+		  .then(response => response.json())
+		  .then(tasks => {
+			// render the task list
+		  });
+
+	</script>
+</body>
+</html>

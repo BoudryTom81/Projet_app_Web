@@ -1,0 +1,21 @@
+<!-- edit_task.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Task</title>
+</head>
+<body>
+    <h1>Edit Task</h1>
+        <!-- La méthode 'post' est utilisée pour soumettre les données du formulaire à l'URL '/edit_task' -->
+    <form method="post" action="{{ url_for('edit_task', id=task.id) }}">
+        <label for="title">Title:</label>
+                <!-- L'utilisateur peut entrer un titre pour la tâche. La valeur de l'input est initialement définie à la valeur actuelle du titre de la tâche. -->
+        <input type="text" name="title" value="{{ task.title }}"><br><br>
+        <label for="description">Description:</label>
+                <!-- L'utilisateur peut entrer une description pour la tâche. La valeur de la textarea est initialement définie à la valeur actuelle de la description de la tâche. -->
+        <textarea name="description">{{ task.description }}</textarea><br><br>
+                <!-- Le bouton "Save" soumet les données du formulaire pour les enregistrer -->
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
