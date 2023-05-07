@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+    <title>Liste des tâches</title>
+</head>
+<body>
+    <h1>Liste des tâches</h1>
+    <!-- Création du tableau pour afficher les tâches -->
+    <table>
+        <thead>
+        <!-- Entête du tableau -->
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Terminé</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Boucle pour afficher chaque tâche -->
+            {% for tache in taches %}
+            <tr>
+                <td>{{ tache['id'] }}</td>
+                <td>{{ tache['description'] }}</td>
+                <!-- Condition pour afficher si la tâche est terminée ou non -->
+                <td>{% if tache['termine'] %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<!-- Fin du tableau -->
+</body>
+</html>
