@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un compte</title>
+  <style>
+    /* Styles pour les boutons */
+    .btn {
+      display: inline-block;
+      margin: 20px;
+      padding: 10px 20px;
+      background-color: #f1c40f;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .btn:hover {
+      background-color: #f39c12;
+    }
+
+    /* Styles pour la page de création de compte */
+    body {
+      background-color: #ecf0f1;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 48px;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+      color: #f1c40f;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="password"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 18px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Créer un compte</h1>
+    <form method="POST" action="/register">
+      <label for="username">Nom d'utilisateur :</label>
+      <input type="text" id="username" name="username" required>
+      <label for="password">Mot de passe :</label>
+      <input type="password" id="password" name="password" required>
+      <button class="btn" type="submit">Créer le compte</button>
+    </form>
+  </div>
+</body>
+</html>
