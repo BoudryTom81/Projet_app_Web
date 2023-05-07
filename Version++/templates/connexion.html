@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!-- Déclaration de la langue de la page -->
+
+<html lang="en">
+<!-- Entête de la page -->
+
+<head>
+      <!-- Encodage de la page -->
+
+  <meta charset="UTF-8">
+      <!-- Titre de la page -->
+
+  <title>Connexion</title>
+  <style>
+      <!-- Définition des styles CSS -->
+
+    /* Styles pour le formulaire de connexion */
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 36px;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+      color: #f1c40f;
+      text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      background-color: #ecf0f1;
+      margin-bottom: 20px;
+    }
+    input[type="submit"] {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      background-color: #f1c40f;
+      color: #fff;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    input[type="submit"]:hover {
+      background-color: #f39c12;
+    }
+
+    /* Styles pour la page de connexion */
+    body {
+      background-color: #ecf0f1;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Connexion</h1>
+        <!-- Affichage d'un message d'erreur si la variable 'error' est définie dans le contexte -->
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
+        <!-- Formulaire pour la connexion -->
+    <form action="{{ url_for('connexion') }}" method="post">
+            <!-- Champ pour le nom d'utilisateur -->
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" name="username" required>
+  <!-- Champ pour le mot de passe -->
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" required>
+  <!-- Bouton pour soumettre le formulaire -->
+      <input type="submit" value="Se connecter">
+    </form>
+  </div>
+</body>
+</html>
